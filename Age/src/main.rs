@@ -1,7 +1,7 @@
 use std::io;
 
 fn main() {
-    let current_year = 2025;
+    let current_year: i32 = 2025;
 
     // Input name
     println!("Enter your name: ");
@@ -22,7 +22,12 @@ fn main() {
         .parse()
         .expect("Please enter a valid number");
 
-    let age = current_year - year_of_birth;
+    if year_of_birth > current_year {
+        println!("Year of birth cannot be in the future!");
+        return;
+    }
+
+    let age: i32 = current_year - year_of_birth;
 
     println!("Hello, {}", name);
     println!("You are {} years old!", age);
