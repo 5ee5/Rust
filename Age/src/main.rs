@@ -22,13 +22,14 @@ fn main() {
         .parse()
         .expect("Please enter a valid number");
 
-    if year_of_birth > current_year {
-        println!("Year of birth cannot be in the future!");
-        return;
-    }
-
     let age: i32 = current_year - year_of_birth;
 
     println!("Hello, {}", name);
-    println!("You are {} years old!", age);
+    
+    if age < 0 {
+        let years_in_future = -age;
+        println!("You are {} years in the future!", years_in_future);
+    } else {
+        println!("You are {} years old!", age);
+    }
 }
