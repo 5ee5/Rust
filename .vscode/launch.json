@@ -18,6 +18,15 @@
                 "args": ["run", "-p", "Hello"]
             },
             "args": []
+        },
+        {
+            "name": "Run Num",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": ["run", "-p", "Num"]
+            },
+            "args": []
         }
     ]
 }
