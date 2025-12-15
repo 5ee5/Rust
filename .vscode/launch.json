@@ -27,6 +27,15 @@
                 "args": ["run", "-p", "Num"]
             },
             "args": []
+        },
+        {
+            "name": "Run Rand",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": ["run", "-p", "Rand"]
+            },
+            "args": []
         }
     ]
 }

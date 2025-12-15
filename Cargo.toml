@@ -2,4 +2,6 @@
 members = [
 "Age",
 "Hello",
-"Num"]
+"Num",
+"Rand"
+]
