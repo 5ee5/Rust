@@ -3,31 +3,43 @@ use std::io;
 use std::cmp::Ordering;
 
 fn main() {
-    let secret = rand::rng().random_range(1..=100);
-
-    println!("Guess the number between 1 and 100:");
-
     loop {
-        let mut input = String::new();
+        let secret = rand::rng().random_range(1..=100);
 
-        io::stdin()
-            .read_line(&mut input)
-            .expect("Failed to read line");
+        println!("\nGuess the number between 1 and 100 (or type 'exit' to quit):");
 
-        let guess: u32 = match input.trim().parse() {
-    Ok(num) => num,
-    Err(_) => {
-        println!("Please enter a number");
-        continue;
-    }
-};
+        let mut guesses = 0;
+        loop {
+            guesses += 1;
+            let mut input = String::new();
 
-        match guess.cmp(&secret) {
-            Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
-            Ordering::Equal => {
-                println!("You win!");
-                break;
+            io::stdin()
+                .read_line(&mut input)
+                .expect("Failed to read line");
+
+            let input_str = input.trim();
+            
+            if input_str == "exit" {
+                println!("Goodbye!");
+                return;
+            }
+
+            let guess: u32 = match input_str.parse() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Please enter a number");
+            continue;
+        }
+    };
+
+            match guess.cmp(&secret) {
+                Ordering::Less => println!("Too small!"),
+                Ordering::Greater => println!("Too big!"),
+                Ordering::Equal => {
+                    println!("You win!");
+                    println!("It took you {} guesses!", guesses);
+                    break;
+                }
             }
         }
     }
