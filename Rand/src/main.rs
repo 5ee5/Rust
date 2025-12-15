@@ -1,5 +1,6 @@
 use rand::Rng;
 use std::io;
+use std::cmp::Ordering;
 
 fn main() {
     let secret = rand::rng().random_range(1..=100);
@@ -8,9 +9,11 @@ fn main() {
 
     loop {
         let mut input = String::new();
+
         io::stdin()
             .read_line(&mut input)
             .expect("Failed to read line");
+
         let guess: u32 = match input.trim().parse() {
     Ok(num) => num,
     Err(_) => {
@@ -19,13 +22,13 @@ fn main() {
     }
 };
 
-if guess < secret {
-    println!("Too small!");
-} else if guess > secret {
-    println!("Too big!");
-} else {
-    println!("You win!");
-    break;
-}
+        match guess.cmp(&secret) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }
     }
 }
