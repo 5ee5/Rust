@@ -3,6 +3,7 @@ use std::io;
 use std::cmp::Ordering;
 
 fn main() {
+    let mut rounds = 0;
     loop {
         let secret = rand::rng().random_range(1..=100);
 
@@ -21,6 +22,7 @@ fn main() {
             
             if input_str == "exit" {
                 println!("Goodbye!");
+                println!("You played {} games!", rounds);
                 return;
             }
 
@@ -38,6 +40,7 @@ fn main() {
                 Ordering::Equal => {
                     println!("You win!");
                     println!("It took you {} guesses!", guesses);
+                    rounds += 1;
                     break;
                 }
             }
